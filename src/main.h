@@ -90,7 +90,7 @@
 //define DEBUG_ALPHA_CACHE 1
 //define DEBUG_OPENGL_LEAKS 1
 
-#define SMALL_VERSION "1.1.5.1"
+#define SMALL_VERSION "1.1.5.1.mageia1"
 #define CHECK_VERSION "01.01.05.01"
 
 
