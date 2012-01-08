@@ -457,3 +457,13 @@ std::vector<std::string> getLang()
         langs.push_back(lang.substr(0, dot));
     return langs;
 }
+
+bool checkPath(std::string path)
+{
+    if (path.empty())
+        return true;
+    return path.find("../") == std::string::npos
+        && path.find("..\\") == std::string::npos
+        && path.find("/..") == std::string::npos
+        && path.find("\\..") == std::string::npos;
+}

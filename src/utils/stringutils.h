@@ -180,4 +180,6 @@ std::string combineDye2(std::string file, std::string dye);
 
 std::vector<std::string> getLang();
 
+bool checkPath(std::string path);
+
 #endif // UTILS_STRINGUTILS_H
