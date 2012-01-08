@@ -87,7 +87,8 @@ std::vector<updateFile> loadXMLFile(const std::string &fileName)
         else
             file.required = false;
 
-        files.push_back(file);
+        if (checkPath(file.name))
+            files.push_back(file);
     }
 
     return files;
@@ -114,7 +115,7 @@ std::vector<updateFile> loadTxtFile(const std::string &fileName)
             thisFile.required = true;
             thisFile.desc = "";
 
-            if (!thisFile.name.empty())
+            if (!thisFile.name.empty() && checkPath(thisFile.name))
                 files.push_back(thisFile);
         }
     }
