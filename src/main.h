@@ -45,7 +45,7 @@
  * different interfaces, which have different implementations for each server.
  */
 
-#define SMALL_VERSION "1.2.3.4"
+#define SMALL_VERSION "1.2.3.4.mageia2"
 #define CHECK_VERSION "01.02.03.04"
 
 #ifdef HAVE_CONFIG_H
