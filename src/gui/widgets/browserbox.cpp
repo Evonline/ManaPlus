@@ -175,13 +175,35 @@ void BrowserBox::addRow(const std::string &row, bool atTop)
         while (mTextRows.size() > mMaxRows)
         {
             mTextRows.pop_front();
-            for (unsigned int i = 0; i < mLinks.size(); i++)
-            {
-                mLinks[i].y1 -= font->getHeight();
-                mLinks[i].y2 -= font->getHeight();
 
-                if (mLinks[i].y1 < 0)
-                    mLinks.erase(mLinks.begin() + i);
+            int yStart = 0;
+
+            LinePartIterator i = mLineParts.begin();
+            if (i != mLineParts.end())
+            {
+                ++ i;
+                for (; i != mLineParts.end(); ++ i)
+                {
+                    const LinePart &part = *i;
+                    if (!part.mX)
+                    {
+                        yStart = part.mY;
+                        break;
+                    }
+                }
+            }
+
+            LinkIterator it = mLinks.begin();
+            LinkIterator it_end = mLinks.end();
+            while (it != it_end)
+            {
+                (*it).y1 -= yStart;
+                (*it).y2 -= yStart;
+
+                if ((*it).y1 < 0)
+                    it = mLinks.erase(it);
+                else
+                    ++ it;
             }
         }
     }
