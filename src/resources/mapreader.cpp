@@ -41,6 +41,8 @@
 #include <iostream>
 #include <zlib.h>
 
+extern int serverVersion;
+
 int inflateMemory(unsigned char *in, unsigned int inLength,
                   unsigned char *&out, unsigned int &outLength);
 
@@ -407,8 +409,24 @@ inline static void setTile(Map *map, MapLayer *layer, int x, int y, int gid)
     {
         // Set collision tile
 //        if (set && (gid - set->getFirstGid() == 1))   buggy update
-        if (set && (gid - set->getFirstGid() != 0))
-            map->blockTile(x, y, Map::BLOCKTYPE_WALL);
+        if (set)
+        {
+            if (serverVersion > 0)
+            {
+                switch (gid - set->getFirstGid())
+                {
+                    case 4: // GROUNDTOP collision
+                        break;
+                    default:
+                        map->blockTile(x, y, Map::BLOCKTYPE_WALL);
+                        break;
+                }
+            }
+            else if (gid - set->getFirstGid() != 0)
+            {
+                map->blockTile(x, y, Map::BLOCKTYPE_WALL);
+            }
+        }
     }
 }
 
